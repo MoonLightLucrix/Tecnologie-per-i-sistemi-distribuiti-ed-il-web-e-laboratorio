@@ -4,11 +4,11 @@ Classe usata per definire alcuni metodi utili nella gestione dei datagrammi,
 utilizzati sia dal client che dal server. 
 
 */
-package JUDPClient;
+package JUDPServer;
 import java.io.*;
 import java.net.*;
 import java.util.*;
-import JUDPClient.*;
+import JUDPServer.*;
 
 public class DatagramUtility {	
     // metodo per creare un pacchetto da una stringa
