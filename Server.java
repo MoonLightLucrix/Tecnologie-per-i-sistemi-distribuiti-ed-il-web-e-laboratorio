@@ -1,89 +1,60 @@
-package JUDPServer;
+package JTCPServer;
 import java.io.*;
 import java.util.*;
 import java.net.*;
-import JUDPServer.*;
+import JTCPServer.*;
 
 public class Server
 {
-    //public static final int port=8080;
-	public static void main(String[] args)
+	public static void main(String[] args) throws IOException
 	{
-		DatagramSocket socket=null;
-        int port=8080;
+        int porta=8080;
+        if(args.length>=1)
+        {
+            porta=Integer.parseInt(args[0]);
+        }
+        ServerSocket local_sock=new ServerSocket(porta);
+        System.out.println("Server: started ");
+        System.out.println("Server Socket: " + local_sock);
+        Socket remote_sock=null;
+        BufferedReader in=null;
+        PrintWriter out=null;
         try
         {
-            if(args.length==0)
+            remote_sock=local_sock.accept();
+            System.out.println("Connection accepted: "+ remote_sock);
+            
+            InputStreamReader input1=new InputStreamReader(remote_sock.getInputStream());
+            in=new BufferedReader(input1);
+            
+            OutputStreamWriter output1=new OutputStreamWriter(remote_sock.getOutputStream());
+            BufferedWriter bw=new BufferedWriter(output1);
+            out=new PrintWriter(bw,true);
+            
+            boolean flag=false;
+            while(flag!=true)
             {
-                port=8080;
-            }
-            else
-            {
-                port=Integer.parseInt(args[0]);
+                String str=in.readLine();
+                if(str.equals("interrupt"))
+                {
+                    flag=true;
+                }
+                else
+                {
+                    System.out.println(str);
+                    out.println(str);
+                }
             }
         }
-        catch(Exception e)
+        catch(IOException e)
         {
-            System.err.println("Porta sbagliata!");
-            e.printStackTrace();
+            System.err.println("Accept failed");
             System.exit(1);
         }
-		try
-		{
-			socket=new DatagramSocket(port);
-		}
-		catch(SocketException e)
-		{
-			System.err.println("Errore nella creazione della socket!");
-			e.printStackTrace();
-			System.exit(1);
-		}
-		try
-		{
-			while(true)
-			{
-				System.out.println("\nIn attesa di richieste");
-				DatagramPacket packet=null;
-				InetAddress mittAddr=null;
-				int mittPort=0;
-				try
-				{
-					byte[] buf=new byte[256];
-					packet=new DatagramPacket(buf,buf.length);
-					socket.receive(packet);
-					mittAddr=packet.getAddress();
-					mittPort=packet.getPort();
-					System.out.println("Ricevuta richiesta da "+mittAddr+" "+mittPort);
-					
-				}
-				catch(IOException e)
-				{
-					System.err.println("Errore nella ricezione del messaggio!");
-					e.printStackTrace();
-					continue;
-				}
-                try
-                {
-                    String msg=DatagramUtility.getContent(packet);
-                    byte[] data=new byte[256];
-                    data=msg.getBytes();
-                    packet=new DatagramPacket(data,data.length,mittAddr,mittPort);
-                    socket.send(packet);
-                    System.out.println("Risposta inviata a: "+mittAddr+" "+mittPort);
-                }
-                catch(IOException e)
-                {
-                    System.err.println("Errore nell'invio della risposta: "+e.getMessage());
-                    e.printStackTrace();
-                    continue;
-                }
-			}
-		}
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-        System.out.println("Server: termino…");
-        socket.close();
-	}	
+        System.out.println("Server: closing…");
+        out.close();
+        in.close();
+        remote_sock.close();
+        local_sock.close();
+	}
 }
