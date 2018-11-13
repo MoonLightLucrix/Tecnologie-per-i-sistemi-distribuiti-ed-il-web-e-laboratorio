@@ -23,7 +23,7 @@ public class Server
             {
                 try
                 {
-                    System.out.println(">>Wait for connections on port" + porta + "…");
+                    System.out.println(">>Wait for connections on port " + porta + "…");
                     
                     Socket remote_sock=local_sock.accept();
                     System.out.println("> Connection received!");
