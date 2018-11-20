@@ -1,0 +1,10 @@
+
+Scrivere in C un programma con due thread produttori P1 e P2 che condividono una variabile m intera, che va inizializzata con un numero casuale compreso tra 1 e 10.
+I thread eseguono un ciclo infinito, comportandosi rispettivamente come segue:
+P1 controlla il valore M di m:
+● se M è compreso tra 1 e 5, P1 sveglia P2, genera un numero
+casuale compreso tra 1 e 10, lo memorizza in M e lo stampa a video ● seinveceMècompresotra6e10,P1simetteinattesa
+P2 controlla il valore di M:
+● seMècompresotra6e10,P2svegliaP1,generaunnumero
+casuale compreso tra 1 e 10, lo memorizza in M e lo stampa a video ● seMècompresotra1e5,P2simetteinattesa
+
