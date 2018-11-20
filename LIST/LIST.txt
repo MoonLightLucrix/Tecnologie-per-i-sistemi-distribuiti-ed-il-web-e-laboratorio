@@ -1,0 +1,9 @@
+
+Implementare un server, in C o Java, che risponde sul port 7777.
+Il server mantiene un vettore V con le ultime dieci richieste (stringhe di 10 caratteri) ricevute.
+Le richieste a cui il server deve rispondere sono:
+1. la stringa "LIST", a cui il server risponde inviando al client tutte le risposte finora memorizzate in V, separate da '\n';
+2. qualsiasi altra stringa viene trattata come messaggio da inserire nel vettore V:
+2.1 selastringaègiàpresenteinV,ilserverrispondecon"presente";
+2.2 selastringanonèancorapresenteinV,ilserverlaaggiungeaV, eventualmente sovrascrivendone una a caso tra quelle già esistenti, e risponde "inserita" al client.
+Dopo avere risposto, il server chiude la connessione con il client e torna in attesa di richieste.
