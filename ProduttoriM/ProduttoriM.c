@@ -61,17 +61,3 @@ int main(int argc, char**argv)
 	pthread_detach(th2);
 	pthread_exit(NULL);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
