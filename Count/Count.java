@@ -1,7 +1,5 @@
-package Count;
 import java.io.*;
 import java.util.*;
-import Count.*;
 
 public class Count extends Thread
 {
