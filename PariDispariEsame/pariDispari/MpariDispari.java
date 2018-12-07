@@ -21,7 +21,7 @@ public class MpariDispari
 		}
 		try
 		{
-			tp.join();
+			td.join();
 		}
 		catch(InterruptedException e)
 		{
