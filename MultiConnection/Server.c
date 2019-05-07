@@ -46,7 +46,7 @@ int main(int argc,char**argv)
 	}
 	if((local_sock=socket(AF_INET,SOCK_STREAM,0))==-1)
 	{
-		perror("error: can't opened the socket");
+		perror("error: can't open the socket");
 		exit(1);
 	}
 	memset((char*)&local_addr,0,sizeof(local_addr));
