@@ -41,12 +41,12 @@ int main(int argc,char**argv)
 {
 	if(argc<=1)
 	{
-		perror("usage: abbiaci a potta");
+		perror("usage: Server [port]");
 		exit(1);
 	}
 	if((local_sock=socket(AF_INET,SOCK_STREAM,0))==-1)
 	{
-		perror("error: impossibile aprire lo socket");
+		perror("error: can't opened the socket");
 		exit(1);
 	}
 	memset((char*)&local_addr,0,sizeof(local_addr));
